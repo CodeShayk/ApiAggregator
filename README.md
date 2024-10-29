@@ -1,4 +1,4 @@
-# <img src="https://github.com/CodeShayk/ApiAggregator/blob# <img src="https://github.com/CodeShayk/ApiAggregator/blob/master/Images/ninja-icon-16.png" alt="ninja" style="width:30px;"/> ApiAggregator.Net v1.0 
+# <img src="https://github.com/CodeShayk/ApiAggregator/blob/master/Images/ninja-icon-16.png" alt="ninja" style="width:30px;"/> ApiAggregator.Net v1.0 
 [![NuGet version](https://badge.fury.io/nu/ApiAggregator.svg)](https://badge.fury.io/nu/ApiAggregator) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/CodeShayk/ApiAggregator/blob/master/LICENSE.md) 
 [![Master-Build](https://github.com/CodeShayk/ApiAggregator/actions/workflows/Build-Master.yml/badge.svg)](https://github.com/CodeShayk/ApiAggregator/actions/workflows/Build-Master.yml) 
 [![GitHub Release](https://img.shields.io/github/v/release/CodeShayk/ApiAggregator?logo=github&sort=semver)](https://github.com/CodeShayk/ApiAggregator/releases/latest)
@@ -7,11 +7,11 @@
 --
 ## Introduction
 ### What is ApiAggregator?
-`ApiAggregator` is a .net utility to aggregate multiple api requests to return a single composed response. The utility allows cherry picking the list of apis on demand if needed.
+`ApiAggregator` is a .net utility to help combine multiple api requests to return a single aggregated response. The utility optionally allows conditionally including a subset of configured apis to return responses.
 
 #### Extends `Schemio` for APIs
-ApiAggregator consumes `Schemio` to extend support for apis to configure hierarchical graphs of `query`/`transformer` pairs to return a single aggregated response.
-You can read on [Schemio](https://github.com/CodeShayk/Schemio) for more details.
+ApiAggregator uses `Schemio` to extend support for apis to configure hierarchical graph of `query`/`transformer` pairs to return aggregated data in a single response.
+You can read on [Schemio](https://github.com/CodeShayk/Schemio) for more details on the core functionality.
 
 ## Using ApiAggregator
 Coming soon
