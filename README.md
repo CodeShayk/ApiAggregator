@@ -7,11 +7,14 @@
 --
 ## Introduction
 ### What is ApiAggregator?
-`ApiAggregator` is a .net utility to help combine multiple api requests to return a single aggregated response. The utility optionally allows conditionally including a subset of configured apis to return responses.
+`ApiAggregator` is a .net utility to help combine multiple api requests to return a single aggregated response. The framework allows conditionally including a subset of configured apis to return responses.
 
 #### Extends `Schemio` for APIs
 ApiAggregator uses `Schemio` to extend support for apis to configure hierarchical graph of `query`/`transformer` pairs to return aggregated data in a single response.
-You can read on [Schemio](https://github.com/CodeShayk/Schemio) for more details on the core functionality.
+> You can read on [Schemio](https://github.com/CodeShayk/Schemio) for more details on the core functionality. 
+
+Please see appendix for schemio implementation in ApiAggregator.
+
 
 ## Using ApiAggregator
 Coming soon
