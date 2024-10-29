@@ -18,7 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\ApiAggregator\ApiAggregator.csproj" />
+    <ProjectReference Include="..\..\src\ApiAggregator\ApiAggregator.Net.csproj" />
   </ItemGroup>
  
 </Project>

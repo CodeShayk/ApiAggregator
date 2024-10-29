@@ -5,7 +5,7 @@ VisualStudioVersion = 17.9.34723.18
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{4338FF70-3C81-4370-ACFB-00E14545BA99}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiAggregator", "src\ApiAggregator\ApiAggregator.csproj", "{8250784C-5415-47C2-9FE4-9E54FA4672B6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiAggregator.Net", "src\ApiAggregator\ApiAggregator.Net.csproj", "{8250784C-5415-47C2-9FE4-9E54FA4672B6}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{31E7A02C-167D-46FB-A90A-F3995FD5682D}"
 EndProject
@@ -19,9 +19,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "misc", "misc", "{D6340772-5
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "github", "github", "{BCE2D3FE-6CF1-4932-9DEE-5B761A132C5E}"
 	ProjectSection(SolutionItems) = preProject
-		.github\workflows\Build-Master.yml = .github\workflows\Build-Master.yml
-		.github\workflows\CI-Build.yml = .github\workflows\CI-Build.yml
-		.github\workflows\codeql.yml = .github\workflows\codeql.yml
+		.github\workflows\Master-Build.yml = .github\workflows\Master-Build.yml
+		.github\workflows\Master-CodeQL.yml = .github\workflows\Master-CodeQL.yml
+		.github\workflows\PullRequest-CI.yml = .github\workflows\PullRequest-CI.yml
+		.github\workflows\PullRequest-CodeQL.yml = .github\workflows\PullRequest-CodeQL.yml
 	EndProjectSection
 EndProject
 Global
