@@ -5,17 +5,13 @@ VisualStudioVersion = 17.9.34723.18
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{4338FF70-3C81-4370-ACFB-00E14545BA99}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiAggregator.Net", "src\ApiAggregator\ApiAggregator.Net.csproj", "{8250784C-5415-47C2-9FE4-9E54FA4672B6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiAggregator.Net", "src\ApiAggregator\ApiAggregator.Net.csproj", "{8250784C-5415-47C2-9FE4-9E54FA4672B6}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{31E7A02C-167D-46FB-A90A-F3995FD5682D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiAggregator.Tests", "tests\ApiAggregator.Tests\ApiAggregator.Tests.csproj", "{C9ED08F3-F754-4D7A-8034-8FC180EA7F7A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiAggregator.Tests", "tests\ApiAggregator.Tests\ApiAggregator.Tests.csproj", "{C9ED08F3-F754-4D7A-8034-8FC180EA7F7A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "misc", "misc", "{D6340772-5767-4604-9E64-04078C0C2CAC}"
-	ProjectSection(SolutionItems) = preProject
-		LICENSE = LICENSE
-		README.md = README.md
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "github", "github", "{BCE2D3FE-6CF1-4932-9DEE-5B761A132C5E}"
 	ProjectSection(SolutionItems) = preProject

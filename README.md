@@ -12,7 +12,6 @@
 #### Extends `Schemio` for APIs
 ApiAggregator uses `Schemio` to extend support for apis to configure hierarchical graph of `query`/`transformer` pairs to return aggregated data in a single response.
 > You can read on [Schemio](https://github.com/CodeShayk/Schemio) for more details on the core functionality. 
-
 Please see appendix for schemio implementation in ApiAggregator.
 
 
