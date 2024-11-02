@@ -1,34 +1,28 @@
-using Microsoft.Extensions.Configuration;
+using ApiAggregator.Net.Impl;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Schemio;
-using Schemio.Impl;
 
-namespace ApiAggregator
+namespace ApiAggregator.Net
 {
     public static class ServicesExtensions
     {
-        public static IServiceCollection UseApiAggregator(this IServiceCollection services, Func<IEntity, IEntitySchema<IEntity>> schemas)
+        public static IServiceCollection UseApiAggregator(this IServiceCollection services)
         {
-            services.AddTransient(typeof(IQueryBuilder<>), typeof(QueryBuilder<>));
-            services.AddTransient(typeof(ITransformExecutor<>), typeof(TransformExecutor<>));
-            services.AddTransient(typeof(IDataProvider<>), typeof(DataProvider<>));
-            //services.AddTransient(typeof(IEntitySchema<>), typeof(BaseEntitySchema<>));
+            services.AddTransient(typeof(IApiBuilder<>), typeof(ApiBuilder<>));
+            services.AddTransient(typeof(IContractBuilder<>), typeof(ContractBuilder<>));
+            services.AddTransient(typeof(IApiAggregator<>), typeof(ApiAggregator<>));
 
-            services.AddTransient<IQueryExecutor, QueryExecutor>();
-            services.AddTransient<ISchemaPathMatcher, ColonSeparatedMatcher>();
-            services.AddTransient<IQueryEngine, QueryEngine>();
-
-            //services.AddTransient((c) => schema);
+            services.AddTransient<IApiExecutor, ApiExecutor>();
+            services.AddTransient<IApiNameMatcher, StringContainsMatcher>();
+            services.AddTransient<IApiEngine, ApiEngine>();
 
             return services;
         }
 
-        public static IServiceCollection AddEntitySchema<TEntity>(this IServiceCollection services, IEntitySchema<IEntity> schema)
-            where TEntity : IEntity
+        public static IServiceCollection AddApiAggregate<TContract>(this IServiceCollection services, IApiAggregate<TContract> apiAggregate)
+            where TContract : IContract
         {
-            if (schema != null)
-                services.AddTransient(c => (IEntitySchema<TEntity>)schema);
+            if (apiAggregate != null)
+                services.AddTransient(c => (IApiAggregate<TContract>)apiAggregate);
 
             return services;
         }

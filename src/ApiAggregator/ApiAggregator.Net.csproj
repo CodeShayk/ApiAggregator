@@ -36,7 +36,6 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Http" Version="8.0.1" />
-    <PackageReference Include="Schemio.Core" Version="1.0.0" />
   </ItemGroup>
 
   <ItemGroup>
