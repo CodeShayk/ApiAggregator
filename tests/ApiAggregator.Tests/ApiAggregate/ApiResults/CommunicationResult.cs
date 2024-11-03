@@ -1,6 +1,6 @@
 using ApiAggregator.Net;
 
-namespace ApiAggregator.Tests.CustomerAggregate.ApiResults
+namespace ApiAggregator.Tests.ApiAggregate.ApiResults
 {
     [CacheResult]
     public class CommunicationResult : IApiResult

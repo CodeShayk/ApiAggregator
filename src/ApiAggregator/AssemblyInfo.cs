@@ -11,7 +11,8 @@ using System.Runtime.InteropServices;
 // attribute to true on that type.
 
 [assembly: ComVisible(false)]
-[assembly: InternalsVisibleTo("ApiAggregator.Net.Tests")]
+[assembly: InternalsVisibleTo("ApiAggregator.Tests")]
+[assembly: InternalsVisibleTo("DynamicProxyGenAssembly2")]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM.
 

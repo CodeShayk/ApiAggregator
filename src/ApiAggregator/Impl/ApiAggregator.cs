@@ -10,25 +10,17 @@ namespace ApiAggregator.Net.Impl
         private readonly IApiBuilder<TContract> apiBuilder;
         private readonly IContractBuilder<TContract> contractBuilder;
 
-        public ApiAggregator(
-            IApiAggregate<TContract> contract, IApiEngine apiEngine)
-            : this(null, new ApiBuilder<TContract>(contract, new StringContainsMatcher()),
-              new ApiExecutor(apiEngine), new ContractBuilder<TContract>(contract))
-        {
-        }
+        //public ApiAggregator(
+        //    ILogger<ApiAggregator<TContract>> logger,
+        //    IApiAggregate<TContract> contract,
+        //    IApiEngine apiEngine)
+        //    : this(logger, new ApiBuilder<TContract>(contract, new StringContainsMatcher()),
+        //      new ApiExecutor(apiEngine), new ContractBuilder<TContract>(contract))
+        //{
+        //}
 
         public ApiAggregator(
-            ILogger<IApiAggregator<TContract>> logger,
-            IApiAggregate<TContract> contract,
-            IApiNameMatcher schemaPathMatcher,
-            IApiEngine apiEngine)
-            : this(logger, new ApiBuilder<TContract>(contract, schemaPathMatcher),
-              new ApiExecutor(apiEngine), new ContractBuilder<TContract>(contract))
-        {
-        }
-
-        public ApiAggregator(
-            ILogger<IApiAggregator<TContract>> logger,
+            ILogger<ApiAggregator<TContract>> logger,
             IApiBuilder<TContract> apiBuilder,
             IApiExecutor apiExecutor,
             IContractBuilder<TContract> contractBuilder)

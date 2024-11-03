@@ -1,11 +1,11 @@
 using ApiAggregator.Net;
-using ApiAggregator.Tests.CustomerAggregate.ApiResults;
+using ApiAggregator.Tests.ApiAggregate.ApiResults;
 
-namespace ApiAggregator.Tests.CustomerAggregate.WebApis
+namespace ApiAggregator.Tests.ApiAggregate.WebApis
 {
     public class CustomerApi : WebApi<CustomerResult>
     {
-        public CustomerApi() : base("http://sys.test.01.net")
+        public CustomerApi() : base(Endpoints.BaseAddress)
         {
         }
 
@@ -14,7 +14,7 @@ namespace ApiAggregator.Tests.CustomerAggregate.WebApis
             // Executes as root or level 1 api.
             var customerContext = (CustomerContext)context;
 
-            return $"v2/clients/{customerContext.CustomerId}";
+            return string.Format(Endpoints.BaseAddress + Endpoints.Customer, customerContext.CustomerId);
         }
     }
 }

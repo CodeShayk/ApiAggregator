@@ -1,4 +1,5 @@
 using Microsoft.Extensions.Logging;
+using System.Collections;
 using System.Text.Json;
 
 namespace ApiAggregator.Net
@@ -106,19 +107,29 @@ namespace ApiAggregator.Net
 
                         result = await client.GetAsync(Url);
 
-                        if (!result.IsSuccessStatusCode)
-                            logger?.LogInformation($"Result of executing web api {Url} is not success status code");
-
                         var raw = result.Content.ReadAsStringAsync().Result;
 
-                        if (string.IsNullOrWhiteSpace(raw))
-                            logger?.LogInformation($"Result.Content of executing web api {Url} is null or whitespace");
+                        if (!string.IsNullOrWhiteSpace(raw))
+                            logger?.LogInformation($"Result.Content of executing web api: {Url} is {raw}");
 
-                        if (typeof(TResult).IsArray)
+                        if (!result.IsSuccessStatusCode)
                         {
-                            var arrObject = JsonSerializer.Deserialize(raw, typeof(TResult));
+                            logger?.LogInformation($"Result of executing web api {Url} is not success status code");
+                            return null;
+                        }
+
+                        if (typeof(TResult).UnderlyingSystemType != null && typeof(TResult).UnderlyingSystemType.Name.Equals(typeof(CollectionResult<>).Name))
+                        {
+                            var typeArgs = typeof(TResult).GetGenericArguments();
+                            var arrType = typeArgs[0].MakeArrayType();
+                            var arrObject = JsonSerializer.Deserialize(raw, arrType);
                             if (arrObject != null)
-                                return new CollectionResult<TResult>((IEnumerable<TResult>)arrObject);
+                            {
+                                var resultType = typeof(CollectionResult<>);
+                                var collectionType = resultType.MakeGenericType(typeArgs);
+                                var collectionResult = Activator.CreateInstance(collectionType, arrObject);
+                                return (TResult)collectionResult;
+                            }
                         }
                         else
                         {

@@ -1,12 +1,12 @@
 using ApiAggregator.Net;
 using ApiAggregator.Net.Helpers;
-using ApiAggregator.Tests.CustomerAggregate.ApiResults;
+using ApiAggregator.Tests.ApiAggregate.ApiResults;
 
-namespace ApiAggregator.Tests.CustomerAggregate.WebApis
+namespace ApiAggregator.Tests.ApiAggregate.WebApis
 {
     internal class OrderItemsApi : WebApi<OrderItemResult>
     {
-        public OrderItemsApi() : base("http://sys.test.01.net")
+        public OrderItemsApi() : base(Endpoints.BaseAddress)
         {
         }
 
@@ -16,7 +16,7 @@ namespace ApiAggregator.Tests.CustomerAggregate.WebApis
             var orders = (CollectionResult<OrderResult>)parentApiResult;
             var customerContext = (CustomerContext)context;
 
-            return $"v2/clients/{customerContext.CustomerId}/orders/items?$filter=orderId in {orders.Select(o => o.OrderId).ToCSV()}";
+            return string.Format(Endpoints.BaseAddress + Endpoints.OrderItems, customerContext.CustomerId, orders.Select(o => o.OrderId).ToCSV());
         }
     }
 }

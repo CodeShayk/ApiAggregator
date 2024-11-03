@@ -1,11 +1,11 @@
 using ApiAggregator.Net;
-using ApiAggregator.Tests.CustomerAggregate.ApiResults;
+using ApiAggregator.Tests.ApiAggregate.ApiResults;
 
-namespace ApiAggregator.Tests.CustomerAggregate.WebApis
+namespace ApiAggregator.Tests.ApiAggregate.WebApis
 {
     internal class OrdersApi : WebApi<CollectionResult<OrderResult>>
     {
-        public OrdersApi() : base("http://sys.test.01.net")
+        public OrdersApi() : base(Endpoints.BaseAddress)
         {
         }
 
@@ -14,7 +14,7 @@ namespace ApiAggregator.Tests.CustomerAggregate.WebApis
             // Execute as child to customer api.
             var customer = (CustomerResult)parentApiResult;
 
-            return $"v2/clients/{customer.Id}/orders";
+            return string.Format(Endpoints.BaseAddress + Endpoints.Orders, customer.Id);
         }
     }
 }

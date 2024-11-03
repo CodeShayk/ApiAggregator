@@ -1,9 +1,8 @@
 using ApiAggregator.Net;
-using ApiAggregator.Tests.CustomerAggregate.AggregateContract;
-using ApiAggregator.Tests.CustomerAggregate.ResultTransformers;
-using ApiAggregator.Tests.CustomerAggregate.WebApis;
+using ApiAggregator.Tests.ApiAggregate.ResultTransformers;
+using ApiAggregator.Tests.ApiAggregate.WebApis;
 
-namespace ApiAggregator.Tests.CustomerAggregate
+namespace ApiAggregator.Tests.ApiAggregate
 {
     internal class CustomerAggregate : ApiAggregate<Customer>
     {

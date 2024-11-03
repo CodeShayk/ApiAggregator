@@ -11,7 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{31E7A02C
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiAggregator.Tests", "tests\ApiAggregator.Tests\ApiAggregator.Tests.csproj", "{C9ED08F3-F754-4D7A-8034-8FC180EA7F7A}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "misc", "misc", "{D6340772-5767-4604-9E64-04078C0C2CAC}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "solution", "solution", "{D6340772-5767-4604-9E64-04078C0C2CAC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "github", "github", "{BCE2D3FE-6CF1-4932-9DEE-5B761A132C5E}"
 	ProjectSection(SolutionItems) = preProject

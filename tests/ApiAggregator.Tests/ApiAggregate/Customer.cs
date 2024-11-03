@@ -1,6 +1,6 @@
 using ApiAggregator.Net;
 
-namespace ApiAggregator.Tests.CustomerAggregate.AggregateContract
+namespace ApiAggregator.Tests.ApiAggregate
 {
     public class Customer : IContract
     {

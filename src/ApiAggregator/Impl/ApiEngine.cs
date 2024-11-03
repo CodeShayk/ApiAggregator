@@ -28,12 +28,16 @@ namespace ApiAggregator.Net.Impl
 
             Task.WhenAll(tasks);
 
-            var result = new List<IApiResult>();
+            var results = new List<IApiResult>();
 
             foreach (var task in tasks)
-                result.Add(task.Result);
+            {
+                var result = task.Result;
+                if (result != null)
+                    results.Add(result);
+            }
 
-            return result.ToArray();
+            return results.ToArray();
         }
     }
 }
