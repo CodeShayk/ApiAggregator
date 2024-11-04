@@ -11,11 +11,11 @@
 - The framework allows a request to fetch entire aggregated response or partial response by including a subset of configured apis.
 
 ### When is ApiAggregator useful?
-ApiAggregator is helpful for various use cases. 
+ApiAggregator is useful in various use cases. 
 - For creating Level 2 (functional or BFF) apis using Level 1 (core resource) apis.
 - For flexibil extending an api without having to break existing consumers.
 - For on demand data retrieval using list of apis
-- and Many more ..
+- and Many more.
 
 ## Using ApiAggregator
 ### Step 1. Create Aggregated Contract
@@ -58,7 +58,7 @@ internal class CustomerAggregate : ApiAggregate<Customer>
 ```
 `Api Aggregate` comprises of apis configured in hierarchical nested graph with each api having an associated result transformers. The result from the api is fed to the associated result transformer to map data to the aggregated contract.
 
-#### Api & Transformer Pair
+### 2.1 Api & Transformer Pair
 Every `Api` type in the `ApiAggregate` definition should have a complementing `Transformer` type.
 - You need to assign a `name` to the `api/transformer` pair. See below rules for api naming convention.
 
@@ -66,8 +66,9 @@ Rules:
 * You could nest api/transformer pairs in a `parent/child` hierarchy. In a given parent/child hierarchy, the output of the parent api will serve as the input to the nested api to resolve its api endpoint.
 * The api/transformer mappings can be `nested` to `5` levels of dependency.
 * By convention, The api name should be `dot` separated string with a dot for every nested level. The name should includes all parent names separated by a dot for a given hierarchy.
-Example - For a 3 level dependency api mapping the name should be like `customer.orders.items`
+ie. For a 3 level dependency api mapping the name should be like `customer.orders.items`
 
+Example.
 > Below is the snippet from `CustomerAggregate` definition for parent/child relationship between Customer & Communication apis. The api response from CustomerApi is the input to CommunicationApi for resolving its endpoint url.
 ```
    .Map<CustomerApi, CustomerTransform>(With.Name("customer"), -- Parent mapping with name
@@ -151,7 +152,7 @@ public class CustomerTransform : ResultTransformer<CustomerResult, Customer>
 ### Step 3. ApiAggregator Setup
 `ApiAggregator` needs to setup with required dependencies.
 
-#### IoC Registrations
+#### i. IoC Registrations
 With ServiceCollection, you need to register the below dependencies.
 ```
     // Register core services
@@ -173,7 +174,7 @@ With ServiceCollection, you need to register the below dependencies.
     // Register api aggregate definitions. eg CustomerAggregate
     services.AddTransient<IApiAggregate<Customer>, CustomerAggregate>();
 ```
-#### With Fluent Registration Api
+#### ii. With Fluent Registration Api
 You could also acheieve the above registrations using fluent registration below.
 ```
     // Enable logging
@@ -189,19 +190,19 @@ You could also acheieve the above registrations using fluent registration below.
 
 ### Step 4. Use IApiAggregator<`TContract`>
 
-#### IApiAggrgator (DI)
+#### i. IApiAggrgator (DI)
 To use Api aggregator, Inject IApiAggrgator<TContract> where TContract is IContract, using constructor & property injection method or explicity Resolve using service provider
 
 Example. `IServiceProvider.GetService(typeof(IApiAggrgator<Customer>))`
 
-#### Call Aggregator.GetData() method
+#### ii. Call Aggregator.GetData() method
 You need to call the `GetData()` method with an instance of parameter class derived from `IRequestContext` interface.
 - The IRequestContext provides a `Names` property which is a list of string to include all the api names to be included for the given request to fetch aggregated response.
 - When `no` names are passed in the paramter then `entire` aggregated response for all configured apis is returned.
 - When `subset` of apis are included using names then the returned aggregated response only includes `api responses` from included apis.
 - When nested api with `dot` separated api name (eg. `customer.orders.items`) is included then all parent apis also get included for the dependency.
   
-#### Example Control Flow
+##### Example - Control Flow
 > Example execution flow for a nested api included in the GetData() parameter.
 <img src="https://github.com/CodeShayk/ApiAggregator/blob/master/Images/ApiAggregator.ControlFlow.png" alt="control-flow"/> 
 
