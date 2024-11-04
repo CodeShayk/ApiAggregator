@@ -128,15 +128,22 @@ namespace ApiAggregator.Net
                             {
                                 var resultType = typeof(CollectionResult<>);
                                 var collectionType = resultType.MakeGenericType(typeArgs);
-                                var collectionResult = Activator.CreateInstance(collectionType, arrObject);
-                                return (TResult)collectionResult;
+                                var collectionResult = (TResult)Activator.CreateInstance(collectionType, arrObject);
+
+                                SetResponseHeaders(result, collectionResult);
+
+                                return collectionResult;
                             }
                         }
                         else
                         {
                             var obj = JsonSerializer.Deserialize(raw, typeof(TResult));
                             if (obj != null)
-                                return (TResult)obj;
+                            {
+                                var resObj = (TResult)obj;
+                                SetResponseHeaders(result, resObj);
+                                return resObj;
+                            }
                         }
                     }
                     catch (TaskCanceledException ex)
@@ -157,6 +164,14 @@ namespace ApiAggregator.Net
             }
 
             return null;
+
+            static void SetResponseHeaders(HttpResponseMessage response, TResult? result)
+            {
+                if (response.Headers != null && result != null)
+                    foreach (var header in response.Headers)
+                        result?.Headers?.Add(new KeyValuePair<string, string>(header.Key,
+                            header.Value != null && header.Value.Any() ? header.Value.ElementAt(0) : null));
+            }
         }
     }
 }

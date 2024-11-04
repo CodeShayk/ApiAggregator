@@ -4,6 +4,9 @@ namespace ApiAggregator.Net
     {
         public CollectionResult(IEnumerable<T> list) : base(list)
         {
+            Headers = [];
         }
+
+        public List<KeyValuePair<string, string>> Headers { get; set; }
     }
 }

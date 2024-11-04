@@ -3,7 +3,7 @@ using ApiAggregator.Net;
 namespace ApiAggregator.Tests.ApiAggregate.ApiResults
 {
     [CacheResult]
-    public class CommunicationResult : IApiResult
+    public class CommunicationResult : ApiResult
     {
         public int Id { get; set; }
         public string Telephone { get; set; }

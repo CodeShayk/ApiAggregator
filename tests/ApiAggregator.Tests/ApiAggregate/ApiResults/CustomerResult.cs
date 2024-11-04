@@ -2,7 +2,7 @@ using ApiAggregator.Net;
 
 namespace ApiAggregator.Tests.ApiAggregate.ApiResults
 {
-    public class CustomerResult : IApiResult
+    public class CustomerResult : ApiResult
     {
         public int Id { get; set; }
         public string Code { get; set; }

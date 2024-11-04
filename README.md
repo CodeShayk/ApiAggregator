@@ -80,15 +80,19 @@ The purpose of a api class is to execute the web api with api engine to fetch th
 
 As mentioned previously, You can configure an api in `Parent` or `Child` (nested) mode in a hierarchical graph.
 
-To define a `parent` or `nested` api you need to implement from `WebApi<TResult>` class where `TResult` is the result that will be returned from executing the api.  It is an implementation of `IApiResult` type.
-Upon creating the api class. You need to provide below `GetUrl()` implementation.
+To create `Web Api` defined as `parent` or `nested` api, you need to implement from `WebApi<TResult>` class,
+where `TResult` is `IApiResult` interface (or `ApiResult` base class) implementation and is the result that will be returned from executing the api.
+
+Upon creating the web api class, you need to provide `GetUrl()` method implementation.
 * Implement the `GetUrl(IRequestContext context, IApiResult parentApiResult)` method to return the constructed endpoint based on given parameters of the method.
-* For Parent Api, Only `IRequestContext` context parameter is passed to GetUrl() method to resolve the Url endpoint. 
-* For Nested Api, api result parameter (ie. `IApiResult` parentApiResult) from the parent api is additionally passed in to GetUrl() method along with IRequestContext context parameter.
+* For `Parent Api`, only `IRequestContext` context parameter is passed to GetUrl() method to resolve the Url endpoint. 
+* For `Nested Api`, api result parameter (ie. `IApiResult` parentApiResult) from the parent api is additionally passed in to GetUrl() method along with IRequestContext context parameter.
+* Optionally, override `GetHeaders()` method to provide any list of `request headers` for the api.
+* `IApiResult` implementation exposes `Headers` property for any `response headers` received as part of the api response.
 
-Please Note: `IApiResult` parentApiResult parameter is null for apis configured in parent mode.
-
-`Important:` The api `endpoint` needs to be resolved before executing the api with `ApiEngine`.
+`Important:`
+- The api `endpoint` needs to be resolved before executing the api with `ApiEngine`.
+- `IApiResult` parentApiResult parameter is null for apis configured in parent mode.
 
 Examples.
 
