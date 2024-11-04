@@ -7,11 +7,19 @@
 --
 ## Introduction
 ### What is ApiAggregator?
-`ApiAggregator` is a .net utility to help combine multiple api requests to return a single aggregated response. The framework allows conditionally including a subset of configured apis to return responses.
+`ApiAggregator` is a .net utility to help combine multiple api requests to return a single aggregated response. 
+- The framework allows a request to fetch entire aggregated response or partial response by including a subset of configured apis.
+
+### When is ApiAggregator useful?
+ApiAggregator is helpful for various use cases. 
+- For creating Level 2 (functional or BFF) apis using Level 1 (core resource) apis.
+- For flexibil extending an api without having to break existing consumers.
+- For on demand data retrieval using list of apis
+- and Many more ..
 
 ## Using ApiAggregator
 ### Step 1. Create Aggregated Contract
-Aggregate Contract is the resultant response from all the aggregated apis. To create aggregated contract derive the class from `IContract` interface.
+`Aggregated Contract` is the resultant response from all the aggregated apis. To create aggregated contract derive the class from `IContract` interface.
 
 Example.
 ```
@@ -25,7 +33,7 @@ Example.
 }
 ```
 ### Step 2. Create Api Aggregated
-Api Aggregate is the composition of apis to hydrate the aggrgated contract. To create an Api Aggregate derive from `ApiAggregate<TContract>` base class where TContract is Agggregated Contract(ie. Implementation of IContract).
+`Api Aggregate` is the composition of apis configured to obtain an aggregated data populated contract. To create an Api Aggregate derive from `ApiAggregate<TContract>` class where `TContract` is an implementation of IContract (ie. Agggregated Contract).
 
 Example.
 ```
@@ -52,36 +60,36 @@ internal class CustomerAggregate : ApiAggregate<Customer>
 
 #### Api & Transformer Pair
 Every `Api` type in the `ApiAggregate` definition should have a complementing `Transformer` type.
-You need to assign a `name` to the `api/transformer` pair.
+- You need to assign a `name` to the `api/transformer` pair. See below rules for api naming convention.
 
 Rules:
-* You could nest api/transformer pairs in a `parent/child` hierarchy. In which case the output of the parent api will serve as the input to the nested api to resolve its api paramters.
-* The api/transformer mappings can be `nested` to `5` levels down.
-* By convention, it is `dot` separated string for every every nested pair, that includes all parent names separated by a dot.
-Example - `customer.orders.items`
+* You could nest api/transformer pairs in a `parent/child` hierarchy. In a given parent/child hierarchy, the output of the parent api will serve as the input to the nested api to resolve its api endpoint.
+* The api/transformer mappings can be `nested` to `5` levels of dependency.
+* By convention, The api name should be `dot` separated string with a dot for every nested level. The name should includes all parent names separated by a dot for a given hierarchy.
+Example - For a 3 level dependency api mapping the name should be like `customer.orders.items`
 
->Below is the snippet from `CustomerAggregate` definition.
+> Below is the snippet from `CustomerAggregate` definition for parent/child relationship between Customer & Communication apis. The api response from CustomerApi is the input to CommunicationApi for resolving its endpoint url.
 ```
    .Map<CustomerApi, CustomerTransform>(With.Name("customer"), -- Parent mapping with name
            customer => customer.Dependents
               .Map<CommunicationApi, CommunicationTransform>(With.Name("customer.communication")) -- nested mapping with dot separated name
 ```
-#### Web Api Class
-The purpose of a api class is to execute the api call to fetch response.
+#### i. Web Api Class
+The purpose of a api class is to execute the web api with api engine to fetch the response.
 
 As mentioned previously, You can configure an api in `Parent` or `Child` (nested) mode in a hierarchical graph.
 
-To define a `parent` or `nested` api you need to implement from `WebApi<TResult>` base class.
-
-* `TResult` is the result that will be returned from executing the api.  It is an implementation of `IApiResult` type.
+To define a `parent` or `nested` api you need to implement from `WebApi<TResult>` class where `TResult` is the result that will be returned from executing the api.  It is an implementation of `IApiResult` type.
+Upon creating the api class. You need to provide below `GetUrl()` implementation.
 * Implement the `GetUrl(IRequestContext context, IApiResult parentApiResult)` method to return the constructed endpoint based on given parameters of the method.
 * For Parent Api, Only `IRequestContext` context parameter is passed to GetUrl() method to resolve the Url endpoint. 
-* For Nested Api, api result (ie. `IApiResult` parentApiResult parameter) from the parent api is also passed in to GetUrl() method along with IRequestContext context parameter. `IApiResult` parentApiResult parameter is null for api configured in parent mode.
+* For Nested Api, api result parameter (ie. `IApiResult` parentApiResult) from the parent api is additionally passed in to GetUrl() method along with IRequestContext context parameter.
+
+Please Note: `IApiResult` parentApiResult parameter is null for apis configured in parent mode.
 
 `Important:` The api `endpoint` needs to be resolved before executing the api with `ApiEngine`.
 
 Examples.
-
 
 > See example `CustomerApi` implemented to be configured and run in parent mode. 
  ```
@@ -116,10 +124,10 @@ internal class CommunicationApi : WebApi<CommunicationResult>
         }
     }
 ```
-##### Result Tranformer Class
-The purpose of the transformer class is to map the result fetched by the linked api  to the aggrgated contract.
+##### ii. Result Transformer Class
+The purpose of the transformer class is to map the response fetched by the linked api to the aggregated contract.
 
-To define a transformer class, you need to implement `ResultTransformer<TResult, TContract>`
+To define a transformer class, you need to implement `ResultTransformer<TResult, TContract>` class.
 - where TContract is Aggregated Contract implementing `IContract`. eg. Customer. 
 - where TResult is Api Result from associated Query. It is an implementation of `IApiResult` interface. 
 
@@ -139,8 +147,6 @@ public class CustomerTransform : ResultTransformer<CustomerResult, Customer>
         }
     }
 ```
-#### Example Control Flow
-<img src="https://github.com/CodeShayk/ApiAggregator/blob/master/Images/ApiAggregator.ControlFlow.png" alt="control-flow"/> 
 
 ### Step 3. ApiAggregator Setup
 `ApiAggregator` needs to setup with required dependencies.
@@ -189,7 +195,15 @@ To use Api aggregator, Inject IApiAggrgator<TContract> where TContract is IContr
 Example. `IServiceProvider.GetService(typeof(IApiAggrgator<Customer>))`
 
 #### Call Aggregator.GetData() method
-Coming Soon.
+You need to call the `GetData()` method with an instance of parameter class derived from `IRequestContext` interface.
+- The IRequestContext provides a `Names` property which is a list of string to include all the api names to be included for the given request to fetch aggregated response.
+- When `no` names are passed in the paramter then `entire` aggregated response for all configured apis is returned.
+- When `subset` of apis are included using names then the returned aggregated response only includes `api responses` from included apis.
+- When nested api with `dot` separated api name (eg. `customer.orders.items`) is included then all parent apis also get included for the dependency.
+  
+#### Example Control Flow
+> Example execution flow for a nested api included in the GetData() parameter.
+<img src="https://github.com/CodeShayk/ApiAggregator/blob/master/Images/ApiAggregator.ControlFlow.png" alt="control-flow"/> 
 
 ## Credits
 Thank you for reading. Please fork, explore, contribute and report. Happy Coding !! :)
