@@ -100,12 +100,12 @@ public class CustomerApi : WebApi<CustomerResult>
     {
     }
 
-    protected override string GetUrl(IRequestContext context, IApiResult parentApiResult)
+    protected override Uri GetUrl(IRequestContext context, IApiResult parentApiResult)
     {
         // Executes as root or level 1 api. parentApiResult should be null.
         var customerContext = (CustomerContext)context;
 
-        return string.Format(Endpoints.BaseAddress + Endpoints.Customer, customerContext.CustomerId);
+        return new Uri(string.Format(Endpoints.BaseAddress + Endpoints.Customer, customerContext.CustomerId));
     }
 }
 ```
@@ -118,10 +118,10 @@ internal class CommunicationApi : WebApi<CommunicationResult>
         {
         }
 
-        protected override string GetUrl(IRequestContext context, IApiResult parentApiResult)
+        protected override Uri GetUrl(IRequestContext context, IApiResult parentApiResult)
         {
             var customer = (CustomerResult)parentApiResult;
-            return string.Format(Endpoints.BaseAddress + Endpoints.Communication, customer.Id);
+            return new Uri(string.Format(Endpoints.BaseAddress + Endpoints.Communication, customer.Id));
         }
     }
 ```

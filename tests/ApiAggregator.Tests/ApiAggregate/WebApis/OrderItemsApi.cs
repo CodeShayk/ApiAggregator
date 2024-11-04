@@ -10,13 +10,13 @@ namespace ApiAggregator.Tests.ApiAggregate.WebApis
         {
         }
 
-        protected override string GetUrl(IRequestContext context, IApiResult parentApiResult)
+        protected override Uri GetUrl(IRequestContext context, IApiResult parentApiResult)
         {
             // Execute as nested api to order parent api taking OrderResult to resolve api parameter.
             var orders = (CollectionResult<OrderResult>)parentApiResult;
             var customerContext = (CustomerContext)context;
 
-            return string.Format(Endpoints.BaseAddress + Endpoints.OrderItems, customerContext.CustomerId, orders.Select(o => o.OrderId).ToCSV());
+            return new Uri(string.Format(Endpoints.BaseAddress + Endpoints.OrderItems, customerContext.CustomerId, orders.Select(o => o.OrderId).ToCSV()), UriKind.Absolute);
         }
     }
 }

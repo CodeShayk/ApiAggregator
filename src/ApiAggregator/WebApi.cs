@@ -11,8 +11,8 @@ namespace ApiAggregator.Net
     public abstract class WebApi<TResult> : IWebApi
            where TResult : IApiResult
     {
-        protected string BaseAddress;
-        protected string Url;
+        protected Uri BaseAddress;
+        protected Uri Url;
         private bool isContextResolved;
 
         protected WebApi() : this(null)
@@ -21,7 +21,8 @@ namespace ApiAggregator.Net
 
         protected WebApi(string baseAddress)
         {
-            BaseAddress = baseAddress;
+            if (!string.IsNullOrEmpty(baseAddress))
+                BaseAddress = new Uri(baseAddress);
         }
 
         /// <summary>
@@ -56,7 +57,7 @@ namespace ApiAggregator.Net
         /// <param name="context">Request Context. Always available.</param>
         /// <param name="parentApiResult">Result from parent Api. Only available when configured as nested web api. Else will be null.</param>
         /// <returns></returns>
-        protected abstract string GetUrl(IRequestContext context, IApiResult parentApiResult = null);
+        protected abstract Uri GetUrl(IRequestContext context, IApiResult parentApiResult = null);
 
         /// <summary>
         /// Implement to resolve api parameter.
@@ -83,7 +84,7 @@ namespace ApiAggregator.Net
 
             logger?.LogInformation($"Run api: {GetType().Name}");
 
-            if (string.IsNullOrEmpty(Url))
+            if (Url == null)
                 return null;
 
             using (var client = httpClientFactory.CreateClient())
@@ -96,8 +97,8 @@ namespace ApiAggregator.Net
 
                     try
                     {
-                        if (!string.IsNullOrEmpty(BaseAddress))
-                            client.BaseAddress = new Uri(BaseAddress);
+                        if (BaseAddress != null)
+                            client.BaseAddress = BaseAddress;
 
                         var headers = GetHeaders();
 

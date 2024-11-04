@@ -9,10 +9,10 @@ namespace ApiAggregator.Tests.ApiAggregate.WebApis
         {
         }
 
-        protected override string GetUrl(IRequestContext context, IApiResult parentApiResult)
+        protected override Uri GetUrl(IRequestContext context, IApiResult parentApiResult)
         {
             var customer = (CustomerResult)parentApiResult;
-            return string.Format(Endpoints.BaseAddress + Endpoints.Communication, customer.Id);
+            return new Uri(string.Format(Endpoints.BaseAddress + Endpoints.Communication, customer.Id), UriKind.Absolute);
         }
     }
 }
