@@ -139,7 +139,10 @@ public class CustomerTransform : ResultTransformer<CustomerResult, Customer>
         }
     }
 ```
-### ApiAggregator Setup
+#### Example Control Flow
+<img src="https://github.com/CodeShayk/ApiAggregator/blob/master/Images/ApiAggregator.ControlFlow.png" alt="ninja" style="width:30px;"/> 
+
+### Step 3. ApiAggregator Setup
 `ApiAggregator` needs to setup with required dependencies.
 
 #### IoC Registrations
@@ -177,10 +180,16 @@ You could also acheieve the above registrations using fluent registration below.
      services.UseApiAggregator()
              .AddApiAggregate<Customer>(new CustomerAggregate());
 ```
+
+### Step 4. Use IApiAggregator<`TContract`>
+
 #### IApiAggrgator (DI)
 To use Api aggregator, Inject IApiAggrgator<TContract> where TContract is IContract, using constructor & property injection method or explicity Resolve using service provider
-ie. `IServiceProvider.GetService(typeof(IApiAggrgator<Customer>))`
 
+Example. `IServiceProvider.GetService(typeof(IApiAggrgator<Customer>))`
+
+#### Call Aggregator.GetData() method
+Coming Soon.
 
 ## Credits
 Thank you for reading. Please fork, explore, contribute and report. Happy Coding !! :)
