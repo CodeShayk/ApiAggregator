@@ -140,7 +140,7 @@ public class CustomerTransform : ResultTransformer<CustomerResult, Customer>
     }
 ```
 #### Example Control Flow
-<img src="https://github.com/CodeShayk/ApiAggregator/blob/master/Images/ApiAggregator.ControlFlow.png" alt="ninja" style="width:30px;"/> 
+<img src="https://github.com/CodeShayk/ApiAggregator/blob/master/Images/ApiAggregator.ControlFlow.png" alt="control-flow"/> 
 
 ### Step 3. ApiAggregator Setup
 `ApiAggregator` needs to setup with required dependencies.
