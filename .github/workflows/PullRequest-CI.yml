@@ -10,7 +10,7 @@ jobs:
   Run-Lint:
     runs-on: ubuntu-latest
     env:
-      github-token: '${{ secrets.GITHUB_TOKEN }}'
+      github-token: '${{ secrets.GH_Packages }}'
     steps:
       - name: Step-01 Checkout code
         uses: actions/checkout@v3
@@ -85,7 +85,7 @@ jobs:
     outputs:
       semVersion: ${{ needs.Build-Release.outputs.semVersion }}
     env:
-      github-token: '${{ secrets.GITHUB_TOKEN }}'
+      github-token: '${{ secrets.GH_Packages }}'
       nuget-token: '${{ secrets.NUGET_API_KEY }}' 
       working-directory: /home/runner/work/ApiAggregator/ApiAggregator
     steps:
