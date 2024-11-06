@@ -4,19 +4,28 @@
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <Title>ApiAggregator.Net</Title>
+    <Title>ApiAggregator</Title>
     <Authors>CodeShayk</Authors>
     <Company>CodeShayk</Company>
-    <Description>.Net utility to aggregate multiple api requests to return a single composite response. </Description>
+    <Description>.Net utility to combine multiple api requests to return a single aggregated response. </Description>
     <PackageIcon>ninja-icon-16.png</PackageIcon>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <Copyright>Copyright (c) 2024 Code Shayk</Copyright>
-    <RepositoryType>https://github.com/CodeShayk/ApiAggregator</RepositoryType>
+    <RepositoryType></RepositoryType>
     <PackageTags>api, aggregator, api-aggregator, utility, api-utility, data-aggregator, api-response, api-response-aggregator</PackageTags>
     <IncludeSymbols>True</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+    <PackageProjectUrl>https://github.com/CodeShayk/ApiAggregator/wiki</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/CodeShayk/ApiAggregator</RepositoryUrl>
+    <PackageReleaseNotes>v1.0
+- Includes core functionality for aggregating apis.</PackageReleaseNotes>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <Optimize>True</Optimize>
   </PropertyGroup>
 
   <ItemGroup>

@@ -8,7 +8,7 @@
 ## Introduction
 ### What is ApiAggregator?
 `ApiAggregator` is a .net utility to help combine multiple api requests to return a single aggregated response. 
-- The framework allows a request to fetch entire aggregated response or partial response by including a subset of configured apis.
+The framework allows fetching the whole of aggregated response or a partial response based on the list of configured apis included in the aggregator request.
 
 ### When is ApiAggregator useful?
 ApiAggregator is useful in various use cases. 
