@@ -1,4 +1,4 @@
-namespace ApiAggregator.Net
+namespace ApiAggregator
 {
     /// <summary>
     /// Implement to set transform with request.

@@ -1,28 +1,33 @@
-using ApiAggregator.Net;
-using ApiAggregator.Net.Helpers;
+using System.Linq;
+using System.Xml.Linq;
+using ApiAggregator.Helpers;
 using ApiAggregator.Tests.ApiAggregate.ApiResults;
+using Microsoft.Extensions.Hosting;
 using static ApiAggregator.Tests.ApiAggregate.Customer.Order;
 
 namespace ApiAggregator.Tests.ApiAggregate.ResultTransformers
 {
-    public class OrderItemsTransform : ResultTransformer<OrderItemResult, Customer>
+    public class OrderItemsTransform : ResultTransformer<CollectionResult<OrderItemResult>, Customer>
     {
-        public override void Transform(OrderItemResult apiResult, Customer contract)
+        public override void Transform(CollectionResult<OrderItemResult> collectionResult, Customer customer)
         {
-            if (apiResult == null || contract?.Orders == null)
+            if (collectionResult == null || !collectionResult.Any() || customer.Orders == null)
                 return;
 
-            foreach (var order in contract.Orders)
-                if (order.OrderId == apiResult.OrderId)
+            foreach (var result in collectionResult)
+            {
+                var order = customer.Orders.FirstOrDefault(o => o.OrderId == result.OrderId);
+                if (order == null)
+                    continue;
+
+                order.Items = ArrayUtil.EnsureAndResizeArray(order.Items, out var index);
+                order.Items[index] = new OrderItem
                 {
-                    order.Items = ArrayUtil.EnsureAndResizeArray(order.Items, out var index);
-                    order.Items[index] = new OrderItem
-                    {
-                        ItemId = apiResult.ItemId,
-                        Name = apiResult.Name,
-                        Cost = apiResult.Cost
-                    };
-                }
+                    ItemId = result.ItemId,
+                    Name = result.Name,
+                    Cost = result.Cost
+                };
+            }
         }
     }
 }

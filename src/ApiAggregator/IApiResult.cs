@@ -1,7 +1,7 @@
-namespace ApiAggregator.Net
+namespace ApiAggregator
 {
     public interface IApiResult
     {
-        List<KeyValuePair<string, string>> Headers { get; }
+        IDictionary<string, string> Headers { get; internal set; }
     }
 }

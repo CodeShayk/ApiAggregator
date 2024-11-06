@@ -1,5 +1,3 @@
-using ApiAggregator.Net;
-
 namespace ApiAggregator.Tests.ApiAggregate
 {
     public class Customer : IContract
@@ -7,6 +5,7 @@ namespace ApiAggregator.Tests.ApiAggregate
         public int Id { get; set; }
         public string Code { get; set; }
         public string Name { get; set; }
+        public string Branch { get; set; }
         public Contacts Communication { get; set; }
         public Order[] Orders { get; set; }
 
@@ -19,7 +18,6 @@ namespace ApiAggregator.Tests.ApiAggregate
 
             public class Address
             {
-                public int AddressId { get; set; }
                 public string HouseNo { get; set; }
                 public string City { get; set; }
                 public string Region { get; set; }

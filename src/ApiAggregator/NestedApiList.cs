@@ -1,4 +1,4 @@
-namespace ApiAggregator.Net
+namespace ApiAggregator
 {
     public class NestedApiList
     {

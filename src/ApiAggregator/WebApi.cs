@@ -1,8 +1,7 @@
+using ApiAggregator.Helpers;
 using Microsoft.Extensions.Logging;
-using System.Collections;
-using System.Text.Json;
 
-namespace ApiAggregator.Net
+namespace ApiAggregator
 {
     /// <summary>
     /// Implement to create a Web api instance.
@@ -15,7 +14,7 @@ namespace ApiAggregator.Net
         protected Uri Url;
         private bool isContextResolved;
 
-        protected WebApi() : this(null)
+        protected WebApi() : this(string.Empty)
         {
         }
 
@@ -45,10 +44,20 @@ namespace ApiAggregator.Net
         bool IWebApi.IsContextResolved() => isContextResolved;
 
         /// <summary>
-        /// Override to pass custom headers with the api request.
+        /// Override to pass custom outgoing headers with the api request.
         /// </summary>
         /// <returns></returns>
-        protected virtual List<KeyValuePair<string, string>> GetHeaders()
+        protected virtual IDictionary<string, string> GetRequestHeaders()
+        {
+            return new Dictionary<string, string>();
+        }
+
+        /// <summary>
+        /// Override to get custom incoming headers with the api response.
+        /// The headers collection will be present on `IApiResult.Headers` when api response includes any of the headers defined in this method.
+        /// </summary>
+        /// <returns></returns>
+        protected virtual IEnumerable<string> GetResponseHeaders()
         { return []; }
 
         /// <summary>
@@ -100,10 +109,10 @@ namespace ApiAggregator.Net
                         if (BaseAddress != null)
                             client.BaseAddress = BaseAddress;
 
-                        var headers = GetHeaders();
+                        var requestHeaders = GetRequestHeaders();
 
-                        if (headers != null && headers.Any())
-                            foreach (var header in headers)
+                        if (requestHeaders != null && requestHeaders.Any())
+                            foreach (var header in requestHeaders)
                                 client.DefaultRequestHeaders.Add(header.Key, header.Value);
 
                         result = await client.GetAsync(Url);
@@ -123,7 +132,7 @@ namespace ApiAggregator.Net
                         {
                             var typeArgs = typeof(TResult).GetGenericArguments();
                             var arrType = typeArgs[0].MakeArrayType();
-                            var arrObject = JsonSerializer.Deserialize(raw, arrType);
+                            var arrObject = raw.ToObject(arrType);
                             if (arrObject != null)
                             {
                                 var resultType = typeof(CollectionResult<>);
@@ -137,7 +146,7 @@ namespace ApiAggregator.Net
                         }
                         else
                         {
-                            var obj = JsonSerializer.Deserialize(raw, typeof(TResult));
+                            var obj = raw.ToObject(typeof(TResult));
                             if (obj != null)
                             {
                                 var resObj = (TResult)obj;
@@ -164,14 +173,31 @@ namespace ApiAggregator.Net
             }
 
             return null;
+        }
 
-            static void SetResponseHeaders(HttpResponseMessage response, TResult? result)
-            {
-                if (response.Headers != null && result != null)
-                    foreach (var header in response.Headers)
-                        result?.Headers?.Add(new KeyValuePair<string, string>(header.Key,
-                            header.Value != null && header.Value.Any() ? header.Value.ElementAt(0) : null));
-            }
+        private void SetResponseHeaders(HttpResponseMessage response, TResult? result)
+        {
+            if (response.Headers == null || result == null)
+                return;
+
+            var headers = GetResponseHeaders();
+
+            if (headers != null && headers.Any())
+                foreach (var header in headers)
+                {
+                    if (!response.Headers.Any(r => r.Key == header))
+                        continue;
+
+                    var responseHeader = response.Headers.First(r => r.Key == header);
+
+                    var value = responseHeader.Value != null && responseHeader.Value.Any()
+                                                ? responseHeader.Value.ElementAt(0)
+                                                : string.Empty;
+
+                    result.Headers ??= new Dictionary<string, string>();
+
+                    result.Headers.Add(responseHeader.Key, value);
+                }
         }
     }
 }

@@ -1,4 +1,4 @@
-namespace ApiAggregator.Net
+namespace ApiAggregator
 {
     public interface IContractBuilder<out TContract> where TContract : IContract
     {

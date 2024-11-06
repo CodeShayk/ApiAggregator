@@ -1,10 +1,9 @@
-using ApiAggregator.Net;
-using ApiAggregator.Net.Helpers;
+using ApiAggregator.Helpers;
 using ApiAggregator.Tests.ApiAggregate.ApiResults;
 
 namespace ApiAggregator.Tests.ApiAggregate.WebApis
 {
-    internal class OrderItemsApi : WebApi<OrderItemResult>
+    internal class OrderItemsApi : WebApi<CollectionResult<OrderItemResult>>
     {
         public OrderItemsApi() : base(Endpoints.BaseAddress)
         {

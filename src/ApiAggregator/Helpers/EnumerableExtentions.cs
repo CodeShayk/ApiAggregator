@@ -1,6 +1,6 @@
 using System.Text;
 
-namespace ApiAggregator.Net.Helpers
+namespace ApiAggregator.Helpers
 {
     public static class EnumerableExtentions
     {

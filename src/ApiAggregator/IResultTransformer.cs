@@ -1,4 +1,4 @@
-namespace ApiAggregator.Net
+namespace ApiAggregator
 {
     /// <summary>
     /// Implement transformer to map data from supported api result to aggregated contract in context.

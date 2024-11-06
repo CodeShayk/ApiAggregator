@@ -1,4 +1,7 @@
-namespace ApiAggregator.Net.Impl
+using ApiAggregator.Helpers;
+using System.Net.Http;
+
+namespace ApiAggregator.Impl
 {
     internal class ApiExecutor : IApiExecutor
     {
@@ -7,6 +10,7 @@ namespace ApiAggregator.Net.Impl
         public ApiExecutor(IApiEngine apiEngine)
         {
             this.apiEngine = apiEngine;
+            Constraints.NotNull(apiEngine);
         }
 
         public IList<IApiResult> Execute(IRequestContext context, IApiList apis)

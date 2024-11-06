@@ -1,4 +1,6 @@
-namespace ApiAggregator.Net.Impl
+using ApiAggregator.Helpers;
+
+namespace ApiAggregator.Impl
 {
     internal class ContractBuilder<TContract> : IContractBuilder<TContract>
         where TContract : IContract, new()
@@ -8,6 +10,7 @@ namespace ApiAggregator.Net.Impl
         public ContractBuilder(IApiAggregate<TContract> apiAggregate)
         {
             this.apiAggregate = apiAggregate;
+            Constraints.NotNull(apiAggregate);
         }
 
         /// <summary>

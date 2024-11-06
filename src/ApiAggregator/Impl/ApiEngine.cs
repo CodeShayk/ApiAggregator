@@ -1,16 +1,19 @@
+using ApiAggregator.Helpers;
 using Microsoft.Extensions.Logging;
 
-namespace ApiAggregator.Net.Impl
+namespace ApiAggregator.Impl
 {
     internal class ApiEngine : IApiEngine
     {
         private readonly ILogger<ApiEngine> logger;
         private readonly IHttpClientFactory httpClientFactory;
 
-        public ApiEngine(IHttpClientFactory httpClientFactory, ILogger<ApiEngine> logger)
+        public ApiEngine(IHttpClientFactory httpClientFactory, ILogger<ApiEngine> logger = null)
         {
             this.httpClientFactory = httpClientFactory;
             this.logger = logger;
+
+            Constraints.NotNull(httpClientFactory);
         }
 
         public bool CanExecute(IWebApi api) => api is IWebApi;
@@ -20,7 +23,7 @@ namespace ApiAggregator.Net.Impl
             if (apis == null || !apis.Any())
                 return [];
 
-            logger.LogInformation($"Total web apis to execute: {apis.Count()}");
+            logger?.LogInformation($"Total web apis to execute: {apis.Count()}");
 
             var tasks = apis
                 .Select(q => q.Run(httpClientFactory, logger))

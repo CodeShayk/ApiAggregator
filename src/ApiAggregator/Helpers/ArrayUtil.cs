@@ -1,4 +1,4 @@
-namespace ApiAggregator.Net.Helpers
+namespace ApiAggregator.Helpers
 {
     public static class ArrayUtil
     {

@@ -1,4 +1,4 @@
-namespace ApiAggregator.Net
+namespace ApiAggregator
 {
     internal class ApiComparer : IEqualityComparer<IWebApi>
     {

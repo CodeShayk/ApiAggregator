@@ -1,7 +1,7 @@
-using ApiAggregator.Net.Impl;
+using ApiAggregator.Impl;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace ApiAggregator.Net
+namespace ApiAggregator
 {
     public static class ServicesExtensions
     {
@@ -22,7 +22,7 @@ namespace ApiAggregator.Net
             where TContract : IContract
         {
             if (apiAggregate != null)
-                services.AddTransient(c => (IApiAggregate<TContract>)apiAggregate);
+                services.AddTransient(c => apiAggregate);
 
             return services;
         }

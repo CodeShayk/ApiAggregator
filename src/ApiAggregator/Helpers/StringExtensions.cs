@@ -1,4 +1,6 @@
-namespace ApiAggregator.Net.Helpers
+using System.Net.NetworkInformation;
+
+namespace ApiAggregator.Helpers
 {
     public static class StringExtensions
     {

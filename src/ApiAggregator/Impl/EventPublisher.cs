@@ -1,4 +1,6 @@
-namespace ApiAggregator.Net.Impl
+using ApiAggregator.Helpers;
+
+namespace ApiAggregator.Impl
 {
     internal class EventPublisher
     {
@@ -7,6 +9,7 @@ namespace ApiAggregator.Net.Impl
         public EventPublisher(ISubscriber<ExecutorResultArgs> subscriber)
         {
             this.subscriber = subscriber;
+            Constraints.NotNull(subscriber);
         }
 
         public void PublishEvent(IRequestContext context, ExecutorResultArgs args) => subscriber.OnEventHandler(context, args);

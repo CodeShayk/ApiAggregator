@@ -1,5 +1,4 @@
-using ApiAggregator.Net;
-using ApiAggregator.Net.Impl;
+using ApiAggregator.Impl;
 using ApiAggregator.Tests.ApiAggregate;
 using ApiAggregator.Tests.ApiAggregate.ApiResults;
 using ApiAggregator.Tests.ApiAggregate.WebApis;

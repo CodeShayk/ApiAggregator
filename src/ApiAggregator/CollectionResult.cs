@@ -1,12 +1,12 @@
-namespace ApiAggregator.Net
+namespace ApiAggregator
 {
     public class CollectionResult<T> : List<T>, IApiResult
     {
         public CollectionResult(IEnumerable<T> list) : base(list)
         {
-            Headers = [];
+            Headers = new Dictionary<string, string>();
         }
 
-        public List<KeyValuePair<string, string>> Headers { get; set; }
+        public IDictionary<string, string> Headers { get; set; }
     }
 }

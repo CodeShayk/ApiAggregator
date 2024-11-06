@@ -1,4 +1,3 @@
-using ApiAggregator.Net;
 using ApiAggregator.Tests.ApiAggregate.ApiResults;
 
 namespace ApiAggregator.Tests.ApiAggregate.WebApis
@@ -15,6 +14,19 @@ namespace ApiAggregator.Tests.ApiAggregate.WebApis
             var customerContext = (CustomerContext)context;
 
             return new Uri(string.Format(Endpoints.BaseAddress + Endpoints.Customer, customerContext.CustomerId), UriKind.Absolute);
+        }
+
+        protected override IDictionary<string, string> GetRequestHeaders()
+        {
+            return new Dictionary<string, string>
+            {
+                { "x-meta-branch-code", "London" }
+            };
+        }
+
+        protected override IEnumerable<string> GetResponseHeaders()
+        {
+            return new[] { "x-meta-branch-code" };
         }
     }
 }

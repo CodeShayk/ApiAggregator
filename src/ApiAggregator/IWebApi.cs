@@ -1,6 +1,6 @@
 using Microsoft.Extensions.Logging;
 
-namespace ApiAggregator.Net
+namespace ApiAggregator
 {
     /// <summary>
     /// Implement IWebApi to fetch data using API.
@@ -13,7 +13,7 @@ namespace ApiAggregator.Net
 
         bool IsContextResolved();
 
-        Task<IApiResult> Run(IHttpClientFactory httpClientFactory, ILogger logger);
+        Task<IApiResult> Run(IHttpClientFactory httpClientFactory, ILogger logger = null);
 
         /// <summary>
         /// Implement to resolve api parameter.

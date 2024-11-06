@@ -1,4 +1,4 @@
-using ApiAggregator.Net;
+using System.Text.Json.Serialization;
 
 namespace ApiAggregator.Tests.ApiAggregate.ApiResults
 {

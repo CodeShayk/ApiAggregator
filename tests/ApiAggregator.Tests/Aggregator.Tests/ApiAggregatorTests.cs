@@ -1,5 +1,4 @@
-using ApiAggregator.Net;
-using ApiAggregator.Net.Impl;
+using ApiAggregator.Impl;
 using ApiAggregator.Tests.ApiAggregate;
 using Microsoft.Extensions.Logging;
 using Moq;

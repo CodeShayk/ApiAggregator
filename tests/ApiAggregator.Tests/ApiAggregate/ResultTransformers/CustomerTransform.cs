@@ -1,4 +1,3 @@
-using ApiAggregator.Net;
 using ApiAggregator.Tests.ApiAggregate.ApiResults;
 
 namespace ApiAggregator.Tests.ApiAggregate.ResultTransformers
@@ -11,6 +10,9 @@ namespace ApiAggregator.Tests.ApiAggregate.ResultTransformers
             customer.Id = apiResult.Id;
             customer.Name = apiResult.Name;
             customer.Code = apiResult.Code;
+
+            if (apiResult.Headers.TryGetValue("x-meta-branch-code", out var branch))
+                customer.Branch = branch;
         }
     }
 }

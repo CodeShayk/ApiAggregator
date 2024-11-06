@@ -1,6 +1,8 @@
+using System.Data;
+using ApiAggregator.Helpers;
 using Microsoft.Extensions.Logging;
 
-namespace ApiAggregator.Net.Impl
+namespace ApiAggregator.Impl
 {
     internal class ApiAggregator<TContract> : IApiAggregator<TContract>
         where TContract : IContract, new()
@@ -9,15 +11,6 @@ namespace ApiAggregator.Net.Impl
         private readonly IApiExecutor apiExecutor;
         private readonly IApiBuilder<TContract> apiBuilder;
         private readonly IContractBuilder<TContract> contractBuilder;
-
-        //public ApiAggregator(
-        //    ILogger<ApiAggregator<TContract>> logger,
-        //    IApiAggregate<TContract> contract,
-        //    IApiEngine apiEngine)
-        //    : this(logger, new ApiBuilder<TContract>(contract, new StringContainsMatcher()),
-        //      new ApiExecutor(apiEngine), new ContractBuilder<TContract>(contract))
-        //{
-        //}
 
         public ApiAggregator(
             ILogger<ApiAggregator<TContract>> logger,
@@ -29,6 +22,10 @@ namespace ApiAggregator.Net.Impl
             this.apiBuilder = apiBuilder;
             this.apiExecutor = apiExecutor;
             this.contractBuilder = contractBuilder;
+
+            Constraints.NotNull(apiBuilder);
+            Constraints.NotNull(apiExecutor);
+            Constraints.NotNull(contractBuilder);
         }
 
         public TContract GetData(IRequestContext context)
@@ -36,6 +33,7 @@ namespace ApiAggregator.Net.Impl
             // Build apis for the aggregated contract based on the included api names
             var watch = System.Diagnostics.Stopwatch.StartNew();
             var apis = apiBuilder.Build(context);
+
             watch.Stop();
             logger?.LogInformation("Api builder executed in " + watch.ElapsedMilliseconds + " ms");
 

@@ -1,7 +1,6 @@
-using ApiAggregator.Net;
 using ApiAggregator.Tests.ApiAggregate;
-using ApiAggregator.Tests.ApiAggregate.WebApis;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using NUnit.Framework;
 using WireMock.RequestBuilders;
 using WireMock.ResponseBuilders;
@@ -12,8 +11,9 @@ namespace ApiAggregator.Tests.Aggregator.E2E.Tests
     [TestFixture]
     public class BaseE2ETest
     {
-        protected IServiceProvider serviceProvider;
         protected WireMockServer server;
+        protected ServiceProvider serviceProvider;
+        protected IApiAggregator<Customer> apiAggregator;
 
         [OneTimeTearDown]
         public void OneTimeTearDown()
@@ -27,19 +27,24 @@ namespace ApiAggregator.Tests.Aggregator.E2E.Tests
                 sdisposable.Dispose();
         }
 
-        public void StubApi(string endpoint, object body)
+        public void StubApi(string endpoint, object body, IDictionary<string, string> headers = null)
         {
             // Arrange (start WireMock.Net server)
+
+            var response = Response.Create()
+                  .WithStatusCode(200)
+                  .WithBodyAsJson(body);
+
+            if (headers != null)
+                response.WithHeaders(headers);
+
             server
               .Given(Request.Create().WithUrl(endpoint).UsingGet())
-              .RespondWith(
-                Response.Create()
-                  .WithStatusCode(200)
-                  .WithBodyAsJson(body, true)
-              );
+              .RespondWith(response);
 
             // Act (use a HttpClient which connects to the URL where WireMock.Net is running)
-            //var response = new HttpClient().GetAsync(endpoint).Result;
+            var result = new HttpClient().GetAsync(endpoint).Result;
+            var raw = result.Content.ReadAsStringAsync().Result;
 
             // Assert
             //Check.That(response).IsEqualTo(EXPECTED_RESULT);
@@ -52,7 +57,7 @@ namespace ApiAggregator.Tests.Aggregator.E2E.Tests
 
             var services = new ServiceCollection();
 
-            services.AddLogging();
+            services.AddLogging(c => c.AddConsole());
             services.AddHttpClient();
 
             services.UseApiAggregator()
@@ -60,6 +65,8 @@ namespace ApiAggregator.Tests.Aggregator.E2E.Tests
 
             // 4. Build the service provider
             serviceProvider = services.BuildServiceProvider();
+
+            apiAggregator = serviceProvider.GetService<IApiAggregator<Customer>>();
         }
     }
 }

@@ -1,4 +1,3 @@
-using ApiAggregator.Net;
 using ApiAggregator.Tests.ApiAggregate.ApiResults;
 
 namespace ApiAggregator.Tests.ApiAggregate.ResultTransformers

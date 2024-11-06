@@ -1,6 +1,6 @@
-using ApiAggregator.Net.Helpers;
+using ApiAggregator.Helpers;
 
-namespace ApiAggregator.Net
+namespace ApiAggregator
 {
     public class StringContainsMatcher : IApiNameMatcher
     {

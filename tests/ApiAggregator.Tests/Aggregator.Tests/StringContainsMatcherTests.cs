@@ -1,4 +1,3 @@
-using ApiAggregator.Net;
 using NUnit.Framework;
 
 namespace ApiAggregator.Tests.Aggregator.Tests

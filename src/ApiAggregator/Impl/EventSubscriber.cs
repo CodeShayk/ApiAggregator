@@ -1,4 +1,4 @@
-namespace ApiAggregator.Net.Impl
+namespace ApiAggregator.Impl
 {
     internal class EventSubscriber : ISubscriber<ExecutorResultArgs>
     {

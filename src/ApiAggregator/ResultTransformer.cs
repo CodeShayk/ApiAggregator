@@ -1,4 +1,4 @@
-namespace ApiAggregator.Net
+namespace ApiAggregator
 
 {
     public abstract class ResultTransformer<TApiResult, TContract> : IResultTransformer, ITransformerContext, ITransformerResultType

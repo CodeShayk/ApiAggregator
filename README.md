@@ -1,4 +1,4 @@
-# <img src="https://github.com/CodeShayk/ApiAggregator/blob/master/Images/ninja-icon-16.png" alt="ninja" style="width:30px;"/> ApiAggregator.Net v1.0 
+# <img src="https://github.com/CodeShayk/ApiAggregator/blob/master/Images/ninja-icon-16.png" alt="ninja" style="width:30px;"/> ApiAggregator v1.0 
 [![NuGet version](https://badge.fury.io/nu/ApiAggregator.svg)](https://badge.fury.io/nu/ApiAggregator) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/CodeShayk/ApiAggregator/blob/master/LICENSE.md) 
 [![Master-Build](https://github.com/CodeShayk/ApiAggregator/actions/workflows/Master-Build.yml/badge.svg)](https://github.com/CodeShayk/ApiAggregator/actions/workflows/Master-Build.yml) 
 [![GitHub Release](https://img.shields.io/github/v/release/CodeShayk/ApiAggregator?logo=github&sort=semver)](https://github.com/CodeShayk/ApiAggregator/releases/latest)
@@ -83,12 +83,13 @@ As mentioned previously, You can configure an api in `Parent` or `Child` (nested
 To create `Web Api` defined as `parent` or `nested` api, you need to implement from `WebApi<TResult>` class,
 where `TResult` is `IApiResult` interface (or `ApiResult` base class) implementation and is the result that will be returned from executing the api.
 
-Upon creating the web api class, you need to provide `GetUrl()` method implementation.
-* Implement the `GetUrl(IRequestContext context, IApiResult parentApiResult)` method to return the constructed endpoint based on given parameters of the method.
+Upon creating the web api class, you need to provide `GetUrl()` method implementation to return `Uri` instance.
+* Implement the `GetUrl(IRequestContext context, IApiResult parentApiResult)` method to return the constructed endpoint using given parameters of the method.
 * For `Parent Api`, only `IRequestContext` context parameter is passed to GetUrl() method to resolve the Url endpoint. 
 * For `Nested Api`, api result parameter (ie. `IApiResult` parentApiResult) from the parent api is additionally passed in to GetUrl() method along with IRequestContext context parameter.
-* Optionally, override `GetHeaders()` method to provide any list of `request headers` for the api.
-* `IApiResult` implementation exposes `Headers` property for any `response headers` received as part of the api response.
+* Optionally, override `GetRequestHeaders()` method to provide a dictionary of `outgoing headers` for the api request.
+* Optionally, override `GetResponseHeaders()` method to provide any list of `incoming headers` from the api response.
+* `IApiResult` implementation exposes `Headers` property for subscribed `response headers` received as part of the api response.
 
 `Important:`
 - The api `endpoint` needs to be resolved before executing the api with `ApiEngine`.
@@ -104,12 +105,28 @@ public class CustomerApi : WebApi<CustomerResult>
     {
     }
 
+    // Override to construct the api endpoint.
     protected override Uri GetUrl(IRequestContext context, IApiResult parentApiResult)
     {
         // Executes as root or level 1 api. parentApiResult should be null.
         var customerContext = (CustomerContext)context;
 
-        return new Uri(string.Format(Endpoints.BaseAddress + Endpoints.Customer, customerContext.CustomerId));
+        return new Uri(string.Format(Endpoints.Customer, customerContext.CustomerId));
+    }
+
+    // Override to pass custom outgoing headers with the api request.
+    protected override IDictionary<string, string> GetRequestHeaders()
+    {
+        return new Dictionary<string, string>
+        {
+            { "x-meta-branch-code", "Geneva" }
+        };
+    }
+
+    // Override to get custom incoming headers with the api response.
+    protected override IEnumerable<string> GetResponseHeaders()
+    {
+        return new[] { "x-meta-branch-code" };
     }
 }
 ```
@@ -125,7 +142,7 @@ internal class CommunicationApi : WebApi<CommunicationResult>
         protected override Uri GetUrl(IRequestContext context, IApiResult parentApiResult)
         {
             var customer = (CustomerResult)parentApiResult;
-            return new Uri(string.Format(Endpoints.BaseAddress + Endpoints.Communication, customer.Id));
+            return new Uri(string.Format(Endpoints.Communication, customer.Id));
         }
     }
 ```

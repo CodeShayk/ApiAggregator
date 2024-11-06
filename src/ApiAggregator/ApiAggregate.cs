@@ -1,4 +1,4 @@
-namespace ApiAggregator.Net
+namespace ApiAggregator
 {
     /// <summary>
     /// Implement the api aggregate with web apis and result transformers to map data to aggregated contract.

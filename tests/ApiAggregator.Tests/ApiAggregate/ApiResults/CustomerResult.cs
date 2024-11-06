@@ -1,5 +1,3 @@
-using ApiAggregator.Net;
-
 namespace ApiAggregator.Tests.ApiAggregate.ApiResults
 {
     public class CustomerResult : ApiResult

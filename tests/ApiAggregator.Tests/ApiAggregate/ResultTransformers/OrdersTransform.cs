@@ -1,27 +1,29 @@
-using ApiAggregator.Net;
-using ApiAggregator.Net.Helpers;
+using System;
 using ApiAggregator.Tests.ApiAggregate.ApiResults;
 using static ApiAggregator.Tests.ApiAggregate.Customer;
 
 namespace ApiAggregator.Tests.ApiAggregate.ResultTransformers
 {
-    public class OrdersTransform : ResultTransformer<OrderResult, Customer>
+    public class OrdersTransform : ResultTransformer<CollectionResult<OrderResult>, Customer>
     {
-        public override void Transform(OrderResult apiResult, Customer contract)
+        public override void Transform(CollectionResult<OrderResult> collectionResult, Customer contract)
         {
-            if (apiResult == null)
+            if (collectionResult == null || !collectionResult.Any())
                 return;
 
             var customer = contract ?? new Customer();
 
-            customer.Orders = ArrayUtil.EnsureAndResizeArray(customer.Orders, out var index);
+            customer.Orders = new Order[collectionResult.Count];
 
-            customer.Orders[index] = new Order
+            for (var index = 0; index < collectionResult.Count; index++)
             {
-                Date = apiResult.Date,
-                OrderId = apiResult.OrderId,
-                OrderNo = apiResult.OrderNo
-            };
+                customer.Orders[index] = new Order
+                {
+                    Date = collectionResult[index].Date,
+                    OrderId = collectionResult[index].OrderId,
+                    OrderNo = collectionResult[index].OrderNo
+                };
+            }
         }
     }
 }

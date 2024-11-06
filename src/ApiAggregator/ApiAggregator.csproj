@@ -20,15 +20,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="..\..\Images\ninja-icon-16.png" Link="misc\ninja-icon-16.png">
+    <None Include="..\..\Images\ninja-icon-16.png" Link="Misc\ninja-icon-16.png">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>
-    <None Include="..\..\LICENSE" Link="misc\LICENSE">
+    <None Include="..\..\LICENSE" Link="Misc\LICENSE">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>
-    <None Include="..\..\README.md" Link="misc\README.md">
+    <None Include="..\..\README.md" Link="Misc\README.md">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>
@@ -39,7 +39,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="misc\" />
+    <Folder Include="Misc\" />
   </ItemGroup>
 
 </Project>
