@@ -11,7 +11,7 @@
 The framework allows fetching the whole of aggregated response or a partial response based on the list of configured apis included in the aggregator request.
 
 ### When is ApiAggregator useful?
-ApiAggregator is useful in various use cases. 
+ApiAggregator is useful in many use cases. Few to list are:
 - For creating Level 2 (functional or BFF) apis using Level 1 (core resource) apis.
 - For easily extending an api without having to break existing consumers.
 - For on demand data retrieval using list of apis
@@ -19,15 +19,15 @@ ApiAggregator is useful in various use cases.
 
 ## Getting Started?
 ### i. Installation
-Install the nuget package as below. 
+Install the latest version of ApiAggregator nuget package with command below. 
 
 ```
 NuGet\Install-Package ApiAggregator 
 ```
 
-### ii. Implementation Guide
+### ii. Developer Guide
 
-Please read [Implementation Guide](https://github.com/CodeShayk/ApiAggregator/blob/master/ApiAggregator.md) for details on how to implement ApiAggregator in your project.
+Please read [Developer Guide](https://github.com/CodeShayk/ApiAggregator/blob/master/ApiAggregator.md) for details on how to implement ApiAggregator in your project.
 
 ## Support
 
