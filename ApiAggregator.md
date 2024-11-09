@@ -196,7 +196,7 @@ You could also acheieve the above registrations using fluent registration below.
      services.UseApiAggregator()
              .AddApiAggregate<Customer>(new CustomerAggregate());
 ```
-Note: Above examples to enable HttpClient is basic. However, you could additional implement circuit breaking & retry polices.
+Note: Above examples to enable HttpClient is basic. However, you could additionally implement circuit breaking & retry polices.
 >Please see [`Circuit Breaker`](https://learn.microsoft.com/en-us/dotnet/architecture/microservices/implement-resilient-applications/implement-circuit-breaker-pattern) pattern for more details.
 
 
