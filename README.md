@@ -22,7 +22,7 @@ ApiAggregator is useful in various use cases.
 Install the nuget package as below. 
 
 ```
-NuGet\Install-Package ApiAggregator -Version 1.0.0
+NuGet\Install-Package ApiAggregator 
 ```
 
 ### ii. Implementation Guide
