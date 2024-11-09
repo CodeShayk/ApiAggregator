@@ -14,7 +14,7 @@ The framework allows fetching the whole of aggregated response or a partial resp
 ApiAggregator is useful in many use cases. Few to list are:
 - For creating Level 2 (functional or BFF) apis using Level 1 (core resource) apis.
 - For easily extending an api without having to break existing consumers.
-- For on demand data retrieval using list of apis
+- For on demand data retrieval of data using different subsets of configured apis to fetch varied datasets per request.
 - and Many more.
 
 ## Getting Started?
