@@ -14,7 +14,7 @@ namespace ApiAggregator.Tests.Aggregator.Tests
         {
             var matcher = new StringContainsMatcher();
 
-            Assert.True(matcher.IsMatch(input, With.Name(config)));
+            Assert.That(matcher.IsMatch(input, With.Name(config)), Is.True);
         }
     }
 }

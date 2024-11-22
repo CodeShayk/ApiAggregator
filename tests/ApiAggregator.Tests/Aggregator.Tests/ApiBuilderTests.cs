@@ -28,7 +28,7 @@ namespace ApiAggregator.Tests.Aggregator.Tests
 
             var result = _apiBuilder.Build(context);
 
-            Assert.IsNotNull(result);
+            Assert.That(result, Is.Not.Null);
 
             Assert.That(result.ApiNestingDepth == 0);
             Assert.That(result.Apis.Count, Is.EqualTo(1));
@@ -45,7 +45,7 @@ namespace ApiAggregator.Tests.Aggregator.Tests
 
             var result = _apiBuilder.Build(context);
 
-            Assert.IsNotNull(result);
+            Assert.That(result, Is.Not.Null);
 
             Assert.That(result.ApiNestingDepth == 0);
             Assert.That(result.Apis.Count, Is.EqualTo(1));
@@ -65,7 +65,7 @@ namespace ApiAggregator.Tests.Aggregator.Tests
 
             var result = _apiBuilder.Build(context);
 
-            Assert.IsNotNull(result);
+            Assert.That(result, Is.Not.Null);
 
             Assert.That(result.ApiNestingDepth == 0);
             Assert.That(result.Apis.Count, Is.EqualTo(1));
@@ -77,8 +77,8 @@ namespace ApiAggregator.Tests.Aggregator.Tests
             var communicationApi = parentApi.Children.FirstOrDefault(x => x.GetType() == typeof(CommunicationApi));
             var ordersApi = parentApi.Children.FirstOrDefault(x => x.GetType() == typeof(OrdersApi));
 
-            Assert.IsNotNull(communicationApi);
-            Assert.IsNotNull(ordersApi);
+            Assert.That(communicationApi, Is.Not.Null);
+            Assert.That(ordersApi, Is.Not.Null);
 
             Assert.That(ordersApi.Children.Count, Is.EqualTo(0));
         }
@@ -90,7 +90,7 @@ namespace ApiAggregator.Tests.Aggregator.Tests
 
             var result = _apiBuilder.Build(context);
 
-            Assert.IsNotNull(result);
+            Assert.That(result, Is.Not.Null);
 
             Assert.That(result.ApiNestingDepth == 0);
             Assert.That(result.Apis.Count, Is.EqualTo(1));
@@ -102,14 +102,14 @@ namespace ApiAggregator.Tests.Aggregator.Tests
             var communicationApi = parentApi.Children.FirstOrDefault(x => x.GetType() == typeof(CommunicationApi));
             var ordersApi = parentApi.Children.FirstOrDefault(x => x.GetType() == typeof(OrdersApi));
 
-            Assert.IsNotNull(communicationApi);
-            Assert.IsNotNull(ordersApi);
+            Assert.That(communicationApi, Is.Not.Null);
+            Assert.That(ordersApi, Is.Not.Null);
 
             // nested child query for order item in order query children as order items are included in paths
             Assert.That(ordersApi.Children.Count, Is.EqualTo(1));
 
             var orderItemsApi = ordersApi.Children.FirstOrDefault(x => x.GetType() == typeof(OrderItemsApi));
-            Assert.IsNotNull(orderItemsApi);
+            Assert.That(orderItemsApi, Is.Not.Null);
         }
     }
 }
