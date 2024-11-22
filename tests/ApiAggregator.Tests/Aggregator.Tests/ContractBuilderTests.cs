@@ -51,7 +51,7 @@ namespace ApiAggregator.Tests.Aggregator.Tests
             Assert.That(orderItemsCollectionTransforms.Count() == 1);
             Assert.That(orderItemsCollectionTransforms.ElementAt(0).InvocationCount == 1);
 
-            Assert.IsNotNull(contract);
+            Assert.That(contract, Is.Not.Null);
         }
 
         public class MockTransform<TResult, TContract> : ResultTransformer<TResult, TContract>
