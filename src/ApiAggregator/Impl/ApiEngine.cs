@@ -1,3 +1,7 @@
+using System.Collections.Generic;
+using System.Linq;
+using System.Net.Http;
+using System.Threading.Tasks;
 using ApiAggregator.Helpers;
 using Microsoft.Extensions.Logging;
 
@@ -21,7 +25,7 @@ namespace ApiAggregator.Impl
         public IEnumerable<IApiResult> Execute(IEnumerable<IWebApi> apis)
         {
             if (apis == null || !apis.Any())
-                return [];
+                return Enumerable.Empty<IApiResult>();
 
             logger?.LogInformation($"Total web apis to execute: {apis.Count()}");
 

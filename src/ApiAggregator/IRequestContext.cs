@@ -5,6 +5,6 @@ namespace ApiAggregator
         /// <summary>
         /// Aggregate api names for data retrieval.
         /// </summary>
-        public string[] Names { get; }
+        string[] Names { get; }
     }
 }

@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace ApiAggregator
 {
     public class CollectionResult<T> : List<T>, IApiResult

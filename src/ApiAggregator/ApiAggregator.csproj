@@ -1,9 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net9.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
+    <TargetFrameworks>net462; netstandard2.0;netstandard2.1;net5.0; net6.0; net8.0; net9.0</TargetFrameworks>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <Nullable>disable</Nullable>
     <Title>ApiAggregator</Title>
     <Authors>CodeShayk</Authors>
     <Company>CodeShayk</Company>
@@ -11,7 +11,7 @@
     <PackageIcon>ninja-icon-16.png</PackageIcon>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <Copyright>Copyright (c) 2024 Code Shayk</Copyright>
+    <Copyright>Copyright (c) 2025 Code Shayk</Copyright>
     <RepositoryType></RepositoryType>
     <PackageTags>api, aggregator, api-aggregator, utility, api-utility, data-aggregator, api-response, api-response-aggregator</PackageTags>
     <IncludeSymbols>True</IncludeSymbols>
@@ -20,9 +20,10 @@
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
     <PackageProjectUrl>https://github.com/CodeShayk/ApiAggregator/wiki</PackageProjectUrl>
     <RepositoryUrl>https://github.com/CodeShayk/ApiAggregator</RepositoryUrl>
-    <PackageReleaseNotes>v2.0 - Targets .Net9.0
+    <PackageReleaseNotes>
+      v2.0.1 - Targets .Net9.0, net5.0,  net6.0,  net8.0, .Net Standard 2.0, and .Net Framework 4.6.2. <br />
 - Includes core functionality for aggregating apis.</PackageReleaseNotes>
-    <Version>2.0.0</Version>
+    <Version>2.0.1</Version>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -46,6 +47,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Http" Version="9.0.0" />
+    <PackageReference Include="System.Text.Json" Version="4.7.2" />
   </ItemGroup>
 
   <ItemGroup>

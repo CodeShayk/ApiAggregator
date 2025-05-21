@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+
 namespace ApiAggregator
 {
     #region Helpers
@@ -65,7 +68,8 @@ namespace ApiAggregator
             if (dependents != null)
                 foreach (var dep in ((IMappings<TContract, TApiResult>)dependents(mapping)).GetMappings)
                 {
-                    dep.DependentOn ??= mapping.Api;
+                    if (dep.DependentOn == null)
+                        dep.DependentOn = mapping.Api;
                     Add(dep);
                 }
 

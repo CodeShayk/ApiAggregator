@@ -1,4 +1,6 @@
-﻿namespace ApiAggregator
+using System.Collections.Generic;
+
+namespace ApiAggregator
 {
     public abstract class RequestContext : IRequestContext
     {
