@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace ApiAggregator
 {
     internal class ApiComparer : IEqualityComparer<IWebApi>

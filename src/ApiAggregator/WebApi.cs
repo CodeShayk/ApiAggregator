@@ -1,3 +1,9 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net.Http;
+using System.Threading;
+using System.Threading.Tasks;
 using ApiAggregator.Helpers;
 using Microsoft.Extensions.Logging;
 
@@ -58,7 +64,7 @@ namespace ApiAggregator
         /// </summary>
         /// <returns></returns>
         protected virtual IEnumerable<string> GetResponseHeaders()
-        { return []; }
+        { return Enumerable.Empty<string>(); ; }
 
         /// <summary>
         /// Implement to construct the api endpoint.
@@ -175,7 +181,7 @@ namespace ApiAggregator
             return null;
         }
 
-        private void SetResponseHeaders(HttpResponseMessage response, TResult? result)
+        private void SetResponseHeaders(HttpResponseMessage response, TResult result)
         {
             if (response.Headers == null || result == null)
                 return;
@@ -193,8 +199,8 @@ namespace ApiAggregator
                     var value = responseHeader.Value != null && responseHeader.Value.Any()
                                                 ? responseHeader.Value.ElementAt(0)
                                                 : string.Empty;
-
-                    result.Headers ??= new Dictionary<string, string>();
+                    if (result.Headers == null)
+                        result.Headers = new Dictionary<string, string>();
 
                     result.Headers.Add(responseHeader.Key, value);
                 }

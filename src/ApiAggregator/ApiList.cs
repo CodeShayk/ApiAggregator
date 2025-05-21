@@ -1,3 +1,6 @@
+using System.Collections.Generic;
+using System.Linq;
+
 namespace ApiAggregator
 {
     internal class ApiList : IApiList

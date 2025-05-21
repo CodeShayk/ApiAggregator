@@ -1,3 +1,5 @@
+using System;
+
 namespace ApiAggregator.Helpers
 {
     public static class ArrayUtil

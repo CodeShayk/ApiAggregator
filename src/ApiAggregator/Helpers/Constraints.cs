@@ -1,4 +1,6 @@
-﻿namespace ApiAggregator.Helpers
+using System;
+
+namespace ApiAggregator.Helpers
 {
     public static class Constraints
     {

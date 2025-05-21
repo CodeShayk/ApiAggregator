@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace ApiAggregator
 {
     public interface IContractBuilder<out TContract> where TContract : IContract

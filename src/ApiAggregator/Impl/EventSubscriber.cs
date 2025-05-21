@@ -1,3 +1,6 @@
+using System.Collections.Generic;
+using System.Linq;
+
 namespace ApiAggregator.Impl
 {
     internal class EventSubscriber : ISubscriber<ExecutorResultArgs>
