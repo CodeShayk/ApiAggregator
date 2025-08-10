@@ -26,8 +26,10 @@ NuGet\Install-Package ApiAggregator
 ```
 
 ### ii. Developer Guide
+This comprehensive guide provides detailed information about the ApiAggregator framework, covering everything from basic concepts to advanced implementation patterns and troubleshooting guidelines.
 
-Please read [Developer Guide](https://github.com/CodeShayk/ApiAggregator/blob/master/ApiAggregator.md) for details on how to implement ApiAggregator in your project.
+Please click on [Developer Guide](https://github.com/CodeShayk/ApiAggregator/wiki/Developer-Guide) for complete details.
+
 
 ## Support
 
