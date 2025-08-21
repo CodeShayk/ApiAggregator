@@ -36,7 +36,7 @@ This project is licensed with the [MIT license](LICENSE).
 
 ## Contributing
 We welcome contributions! Please see our Contributing Guide for details.
-- 🐛 Bug Reports - If you are having problems, please let me know by [raising a new issue](https://github.com/CodeShayk/ApiAggregator/issues/new/choose).
+- 🐛 Bug Reports - If you are having problems, please let me know by raising a [new issue](https://github.com/CodeShayk/ApiAggregator/issues/new/choose).
 - 💡 Feature Requests - Start a [discussion](https://github.com/CodeShayk/ApiAggregator/discussions)
 - 📝 Documentation - Help improve our [docs](https://github.com/CodeShayk/ApiAggregator/wiki)
 - 💻 Code - Submit [pull](https://github.com/CodeShayk/ApiAggregator/pulls) requests
