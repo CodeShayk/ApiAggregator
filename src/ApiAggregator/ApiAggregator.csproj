@@ -21,9 +21,13 @@
     <PackageProjectUrl>https://github.com/CodeShayk/ApiAggregator/wiki</PackageProjectUrl>
     <RepositoryUrl>https://github.com/CodeShayk/ApiAggregator</RepositoryUrl>
     <PackageReleaseNotes>
-      v2.0.1 - Targets .Net9.0, net5.0,  net6.0,  net8.0, .Net Standard 2.0, and .Net Framework 4.6.2. <br />
-- Includes core functionality for aggregating apis.</PackageReleaseNotes>
-    <Version>2.0.1</Version>
+      v2.1.0 - Targets .Net9.0, net5.0,  net6.0,  net8.0, .Net Standard 2.0, and .Net Framework 4.6.2. <br />
+- Critical fix: Eliminated async/await blocking operations that could cause deadlocks
+- Code quality: Fixed syntax consistency issues and improved maintainability
+- Performance: Better handling of concurrent API requests and improved thread pool utilization
+- Maintains 100% backward compatibility
+    </PackageReleaseNotes>
+    <Version>2.1.0</Version>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

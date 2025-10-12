@@ -1,4 +1,4 @@
-# <img src="https://github.com/CodeShayk/ApiAggregator/blob/master/Images/ninja-icon-16.png" alt="ninja" style="width:30px;"/> ApiAggregator v2.0.1
+# <img src="https://github.com/CodeShayk/ApiAggregator/blob/master/Images/ninja-icon-16.png" alt="ninja" style="width:30px;"/> ApiAggregator v2.1.0
 [![NuGet version](https://badge.fury.io/nu/ApiAggregator.svg)](https://badge.fury.io/nu/ApiAggregator) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/CodeShayk/ApiAggregator/blob/master/LICENSE.md) 
 [![Master-Build](https://github.com/CodeShayk/ApiAggregator/actions/workflows/Master-Build.yml/badge.svg)](https://github.com/CodeShayk/ApiAggregator/actions/workflows/Master-Build.yml) 
 [![GitHub Release](https://img.shields.io/github/v/release/CodeShayk/ApiAggregator?logo=github&sort=semver)](https://github.com/CodeShayk/ApiAggregator/releases/latest)
@@ -16,6 +16,8 @@ ApiAggregator is useful in many use cases. Few to list are:
 - For easily extending an api without having to break existing consumers.
 - For on demand retrieval of data using different subsets of configured apis to fetch varied datasets per request.
 - and Many more.
+
+Please see [Wiki](https://github.com/CodeShayk/ApiAggregator/wiki) for more use cases.
 
 ## Getting Started?
 ### i. Installation
@@ -45,6 +47,7 @@ We welcome contributions! Please see our Contributing Guide for details.
 The main branch is now on .NET 9.0. The following previous versions are available:
 | Version  | Release Notes |
 | -------- | --------|
+| [`v2.1.0`](https://github.com/CodeShayk/ApiAggregator/tree/v2.1.0) |  [Notes](https://github.com/CodeShayk/ApiAggregator/releases/tag/v2.1.0) |
 | [`v2.0.0`](https://github.com/CodeShayk/ApiAggregator/tree/v2.0.0) |  [Notes](https://github.com/CodeShayk/ApiAggregator/releases/tag/v2.0.0) |
 | [`v1.0.0`](https://github.com/CodeShayk/ApiAggregator/tree/v1.0.0) |  [Notes](https://github.com/CodeShayk/ApiAggregator/releases/tag/v1.0.0) |
 
