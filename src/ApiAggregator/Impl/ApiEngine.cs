@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
@@ -33,13 +34,21 @@ namespace ApiAggregator.Impl
                 .Select(q => q.Run(httpClientFactory, logger))
                 .ToArray();
 
-            Task.WhenAll(tasks);
+            try
+            {
+                Task.WaitAll(tasks);
+            }
+            catch (AggregateException ex)
+            {
+                // Re-throw the actual exception that occurred in the tasks
+                throw ex.Flatten();
+            }
 
             var results = new List<IApiResult>();
 
-            foreach (var task in tasks)
+            for (int i = 0; i < tasks.Length; i++)
             {
-                var result = task.Result;
+                var result = tasks[i].Result;
                 if (result != null)
                     results.Add(result);
             }

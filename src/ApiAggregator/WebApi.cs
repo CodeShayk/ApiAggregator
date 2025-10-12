@@ -64,7 +64,7 @@ namespace ApiAggregator
         /// </summary>
         /// <returns></returns>
         protected virtual IEnumerable<string> GetResponseHeaders()
-        { return Enumerable.Empty<string>(); ; }
+        { return Enumerable.Empty<string>(); }
 
         /// <summary>
         /// Implement to construct the api endpoint.
@@ -123,7 +123,7 @@ namespace ApiAggregator
 
                         result = await client.GetAsync(Url);
 
-                        var raw = result.Content.ReadAsStringAsync().Result;
+                        var raw = await result.Content.ReadAsStringAsync();
 
                         if (!string.IsNullOrWhiteSpace(raw))
                             logger?.LogInformation($"Result.Content of executing web api: {Url} is {raw}");

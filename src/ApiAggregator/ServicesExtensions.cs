@@ -11,9 +11,9 @@ namespace ApiAggregator
             services.AddTransient(typeof(IContractBuilder<>), typeof(ContractBuilder<>));
             services.AddTransient(typeof(IApiAggregator<>), typeof(ApiAggregator<>));
 
-            services.AddTransient<IApiExecutor, ApiExecutor>();
-            services.AddTransient<IApiNameMatcher, StringContainsMatcher>();
-            services.AddTransient<IApiEngine, ApiEngine>();
+            services.AddTransient(typeof(IApiExecutor), typeof(ApiExecutor));
+            services.AddTransient(typeof(IApiNameMatcher), typeof(StringContainsMatcher));
+            services.AddTransient(typeof(IApiEngine), typeof(ApiEngine));
 
             return services;
         }
