@@ -1,9 +1,16 @@
-# <img src="https://github.com/CodeShayk/ApiAggregator/blob/master/Images/api-icon.png" alt="api" style="width:50px;"/> ApiAggregator v2.1.0
+# <img src="https://github.com/CodeShayk/ApiAggregator/blob/master/Images/api-icon.png" alt="api" style="width:50px;"/> ApiAggregator v2.2.0
 [![NuGet version](https://badge.fury.io/nu/ApiAggregator.svg)](https://badge.fury.io/nu/ApiAggregator) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/CodeShayk/ApiAggregator/blob/master/LICENSE.md) 
 [![Master-Build](https://github.com/CodeShayk/ApiAggregator/actions/workflows/Master-Build.yml/badge.svg)](https://github.com/CodeShayk/ApiAggregator/actions/workflows/Master-Build.yml) 
 [![GitHub Release](https://img.shields.io/github/v/release/CodeShayk/ApiAggregator?logo=github&sort=semver)](https://github.com/CodeShayk/ApiAggregator/releases/latest)
 [![Master-CodeQL](https://github.com/CodeShayk/ApiAggregator/actions/workflows/Master-CodeQL.yml/badge.svg)](https://github.com/CodeShayk/ApiAggregator/actions/workflows/Master-CodeQL.yml) 
+[![.Net 10.0](https://img.shields.io/badge/.Net-10.0-green)](https://dotnet.microsoft.com/en-us/download/dotnet/10.0)
 [![.Net 9.0](https://img.shields.io/badge/.Net-9.0-blue)](https://dotnet.microsoft.com/en-us/download/dotnet/9.0)
+[![.Net 6.0](https://img.shields.io/badge/.Net-8.0-green)](https://dotnet.microsoft.com/en-us/download/dotnet/8.0)
+[![.Net 6.0](https://img.shields.io/badge/.Net-6.0-blue)](https://dotnet.microsoft.com/en-us/download/dotnet/6.0)
+[![.Net 5.0](https://img.shields.io/badge/.Net-5.0-green)](https://dotnet.microsoft.com/en-us/download/dotnet/5.0)
+[![.Net Framework 4.6.2](https://img.shields.io/badge/.Net-4.6.2-blue)](https://dotnet.microsoft.com/en-us/download/dotnet-framework/net46)
+[![.Net Standard 2.1](https://img.shields.io/badge/.NetStandard-2.1-green)](https://github.com/dotnet/standard/blob/v2.0.0/docs/versions/netstandard2.1.md)
+[![.Net Standard 2.0](https://img.shields.io/badge/.NetStandard-2.0-blue)](https://github.com/dotnet/standard/blob/v2.0.0/docs/versions/netstandard2.0.md)
 --
 ## Introduction
 ### What is ApiAggregator?
@@ -44,9 +51,10 @@ We welcome contributions! Please see our Contributing Guide for details.
 - 💻 Code - Submit [pull](https://github.com/CodeShayk/ApiAggregator/pulls) requests
 
 ## Version History
-The main branch is now on .NET 9.0. The following previous versions are available:
+The main branch is now on .NET 10.0. The following previous versions are available:
 | Version  | Release Notes |
 | -------- | --------|
+| [`v2.2.0`](https://github.com/CodeShayk/ApiAggregator/tree/v2.2.0) |  [Notes](https://github.com/CodeShayk/ApiAggregator/releases/tag/v2.2.0) |
 | [`v2.1.0`](https://github.com/CodeShayk/ApiAggregator/tree/v2.1.0) |  [Notes](https://github.com/CodeShayk/ApiAggregator/releases/tag/v2.1.0) |
 | [`v2.0.0`](https://github.com/CodeShayk/ApiAggregator/tree/v2.0.0) |  [Notes](https://github.com/CodeShayk/ApiAggregator/releases/tag/v2.0.0) |
 | [`v1.0.0`](https://github.com/CodeShayk/ApiAggregator/tree/v1.0.0) |  [Notes](https://github.com/CodeShayk/ApiAggregator/releases/tag/v1.0.0) |
